@@ -115,7 +115,11 @@ func (l *LinkedList) RemoveOfTail() {
 		return
 	}
 	current := l.header
-	for current.Next.Next == nil {
+	if current.Next == nil {
+		l.header = nil
+		return
+	}
+	for current.Next.Next != nil {
 		current = current.Next
 	}
 	current.Next = nil
@@ -166,6 +170,6 @@ func main() {
 	l.AddFromTail(4)
 	l.Print()
 	fmt.Println()
-	l.Remove(2)
+	l.RemoveOfTail()
 	l.Print()
 }
