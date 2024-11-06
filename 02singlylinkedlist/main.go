@@ -97,18 +97,75 @@ func (l *LinkedList) Insert(val int, i int) {
 
 //删除开头结点
 
+func (l *LinkedList) RemoveOfHead() {
+	if l.Isempty() {
+		fmt.Println("链表为空")
+		return
+	}
+	current := l.header
+	l.header = current.Next
+
+}
+
 //删除结尾结点
 
-//删除任意位置i的结点
+func (l *LinkedList) RemoveOfTail() {
+	if l.Isempty() {
+		fmt.Println("链表为空")
+		return
+	}
+	current := l.header
+	for current.Next.Next == nil {
+		current = current.Next
+	}
+	current.Next = nil
+}
 
-//查找链表中的某值
+// 删除任意位置i的结点
+func (l *LinkedList) Remove(index int) {
+	if index <= 0 {
+		l.RemoveOfHead()
+		return
+	}
+	if index >= l.Length() {
+		l.RemoveOfTail()
+		return
+	}
+	preNode := l.header
+	for i := 0; i < index-1; i++ {
+		preNode = preNode.Next
+	}
+	preNode.Next = preNode.Next.Next
+}
+
+//查找结点中是否包含某值
+
+func (l *LinkedList) Find(val int) bool {
+	if l.Isempty() {
+		fmt.Println("链表为空")
+		return false
+	}
+	current := l.header
+	flag := false
+	for current != nil {
+		if current.Val == val {
+			flag = true
+			break
+		}
+		current = current.Next
+	}
+	return flag
+
+}
 
 func main() {
-	link := NewLinkedList()
-	link.Insert(1, 0)
-	link.Insert(2, 3)
-	link.Insert(3, 2)
-	link.Insert(10, 1)
-	link.Print()
-
+	l := NewLinkedList()
+	l.AddFromTail(1)
+	l.AddFromTail(2)
+	l.AddFromTail(3)
+	l.AddFromTail(4)
+	l.Print()
+	fmt.Println()
+	l.Remove(2)
+	l.Print()
 }
