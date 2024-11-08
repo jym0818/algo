@@ -131,7 +131,7 @@ func (l *LinkedList) Remove(index int) {
 		l.RemoveOfHead()
 		return
 	}
-	if index >= l.Length() {
+	if index >= l.Length()-1 {
 		l.RemoveOfTail()
 		return
 	}
