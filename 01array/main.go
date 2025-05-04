@@ -5,49 +5,76 @@ import (
 	"math/rand"
 )
 
-func randomAccess(a [5]int) int {
+/* 随机访问元素 */
+func randomAccess(nums []int) (randomNum int) {
 	// 在区间 [0, nums.length) 中随机抽取一个数字
-	randomIndex := rand.Intn(len(a))
-	return a[randomIndex]
+	randomIndex := rand.Intn(len(nums))
+	// 获取并返回随机元素
+	randomNum = nums[randomIndex]
+	return
 }
-func insert(a *[5]int, index int, value int) {
-	for i := len(a) - 1; i > index; i-- {
-		a[i] = a[i-1]
-	}
-	a[index] = value
 
+/* 在数组的索引 index 处插入元素 num */
+func insert(nums []int, num int, index int) {
+	// 把索引 index 以及之后的所有元素向后移动一位
+	for i := len(nums) - 1; i > index; i-- {
+		nums[i] = nums[i-1]
+	}
+	// 将 num 赋给 index 处的元素
+	nums[index] = num
 }
-func delete(a *[5]int, index int) {
-	for i := index; i < len(a)-1; i++ {
-		a[i] = a[i+1]
+
+/* 删除索引 index 处的元素 */
+func remove(nums []int, index int) {
+	// 把索引 index 之后的所有元素向前移动一位
+	for i := index; i < len(nums)-1; i++ {
+		nums[i] = nums[i+1]
 	}
 }
-func traverse(a *[5]int) {
+
+/* 遍历数组 */
+func traverse(nums []int) {
 	count := 0
 	// 通过索引遍历数组
-	for i := 0; i < len(a); i++ {
-		count += a[i]
+	for i := 0; i < len(nums); i++ {
+		count += nums[i]
 	}
 	count = 0
 	// 直接遍历数组元素
-	for _, num := range a {
+	for _, num := range nums {
 		count += num
 	}
-
+	// 同时遍历数据索引和元素
+	for i, num := range nums {
+		count += nums[i]
+		count += num
+	}
 }
-func find(a *[5]int, target int) int {
-	index := -1 //返回-1表示没找到
-	for i := 0; i < len(a); i++ {
-		if a[i] == target {
+
+/* 在数组中查找指定元素 */
+func find(nums []int, target int) (index int) {
+	index = -1
+	for i := 0; i < len(nums); i++ {
+		if nums[i] == target {
 			index = i
 			break
 		}
 	}
-	return index
+	return
 }
 
+/* 扩展数组长度 */
+func extend(nums []int, enlarge int) []int {
+	// 初始化一个扩展长度后的数组
+	res := make([]int, len(nums)+enlarge)
+	// 将原数组中的所有元素复制到新数组
+	for i, num := range nums {
+		res[i] = num
+	}
+	// 返回扩展后的新数组
+	return res
+}
 func main() {
-	//定义数组
-	var a [5]int = [5]int{1, 2, 3, 4, 5}
-	fmt.Println(a)
+	nums := []int{1, 3, 2, 5, 4}
+	fmt.Println(nums)
 }
