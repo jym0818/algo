@@ -58,7 +58,7 @@ func (l *LinkedList) Insert(val int, index int) {
 
 // 删除任意位置i的结点
 func (l *LinkedList) Remove(index int) {
-	if index < 0 || l.header.Next == nil || index > l.Length()-1 {
+	if index < 0 || index >= l.Length() {
 		return // 处理无效索引和空链表
 	}
 	preNode := l.header
