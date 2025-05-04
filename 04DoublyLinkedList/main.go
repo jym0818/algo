@@ -57,7 +57,7 @@ func (l *DoublyLinkedList) Insert(val int, index int) {
 //删除任意结点
 
 func (l *DoublyLinkedList) Remove(index int) {
-	if index < 0 || index >= l.Length() {
+	if index < 0 || index >= l.Length() || l.Length() == 0 {
 		return
 	}
 

@@ -46,7 +46,7 @@ func (l *LoopLinkedList) Insert(val int, index int) {
 
 // 删除任意位置元素
 func (l *LoopLinkedList) Remove(index int) {
-	if index < 0 || index >= l.Length() {
+	if index < 0 || index >= l.Length() || l.Length() == 0 {
 		return // 索引越界直接返回
 	}
 
